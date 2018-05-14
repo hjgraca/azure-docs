@@ -1,4 +1,4 @@
----
+﻿---
 title: Using PowerShell to manage Traffic Manager in Azure | Microsoft Docs
 description: Using PowerShell for Traffic Manager with Azure Resource Manager
 services: traffic-manager
@@ -32,7 +32,7 @@ Each Traffic Manager profile is represented by a resource of type 'TrafficManage
 
 These instructions use Microsoft Azure PowerShell. The following article explains how to install and configure Azure PowerShell.
 
-* [How to install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs)
+* [How to install and configure Azure PowerShell](/powershell/azure/overview)
 
 The examples in this article assume that you have an existing resource group. You can create a resource group using the following command:
 
@@ -156,8 +156,8 @@ In this example, we create a Traffic Manager profile, add two external endpoints
 
 ```powershell
 $profile = New-AzureRmTrafficManagerProfile -Name myprofile -ResourceGroupName MyRG -TrafficRoutingMethod Performance -RelativeDnsName myapp -Ttl 30 -MonitorProtocol HTTP -MonitorPort 80 -MonitorPath "/"
-Add-AzureRmTrafficManagerEndpointConfig -EndpointName eu-endpoint -TrafficManagerProfile $profile -Type ExternalEndpoints -Target app-eu.contoso.com -EndpointStatus Enabled
-Add-AzureRmTrafficManagerEndpointConfig -EndpointName us-endpoint -TrafficManagerProfile $profile -Type ExternalEndpoints -Target app-us.contoso.com -EndpointStatus Enabled
+Add-AzureRmTrafficManagerEndpointConfig -EndpointName eu-endpoint -TrafficManagerProfile $profile -Type ExternalEndpoints -Target app-eu.contoso.com -EndpointLocation "North Europe" -EndpointStatus Enabled
+Add-AzureRmTrafficManagerEndpointConfig -EndpointName us-endpoint -TrafficManagerProfile $profile -Type ExternalEndpoints -Target app-us.contoso.com -EndpointLocation "Central US" -EndpointStatus Enabled
 Set-AzureRmTrafficManagerProfile -TrafficManagerProfile $profile
 ```
 
@@ -200,6 +200,18 @@ In this example, we add an existing child profile as a nested endpoint to an exi
 ```powershell
 $child = Get-AzureRmTrafficManagerEndpoint -Name child -ResourceGroupName MyRG
 New-AzureRmTrafficManagerEndpoint -Name child-endpoint -ProfileName parent -ResourceGroupName MyRG -Type NestedEndpoints -TargetResourceId $child.Id -EndpointStatus Enabled -EndpointLocation "North Europe" -MinChildEndpoints 2
+```
+
+## Adding endpoints from another subscription
+
+Traffic Manager can work with endpoints from different subscriptions. You need to switch to the subscription with the endpoint you want to add to retrieve the needed input to Traffic Manager. Then you need to switch to the subscriptions with the Traffic Manager profile, and add the encpoint to it. The below example shows how to do this with a public IP address.
+
+```powershell
+Set-AzureRmContext -SubscriptionId $EndpointSubscription
+$ip = Get-AzureRmPublicIpAddress -Name $IpAddresName -ResourceGroupName $EndpointRG
+
+Set-AzureRmContext -SubscriptionId $trafficmanagerSubscription
+New-AzureRmTrafficManagerEndpoint -Name $EndpointName -ProfileName $ProfileName -ResourceGroupName $TrafficManagerRG -Type AzureEndpoints -TargetResourceId $ip.Id -EndpointStatus Enabled
 ```
 
 ## Update a Traffic Manager Endpoint

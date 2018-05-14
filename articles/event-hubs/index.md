@@ -2,7 +2,7 @@
 title: Azure Event Hubs Documentation - Tutorials, API Reference | Microsoft Docs
 description: Learn how to use Event Hubs to ingest millions of events per second from connected IoT devices and applications on a broad set of platforms.
 services: event-hubs
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
 ms.assetid:	
@@ -14,7 +14,7 @@ ms.date: 01/23/2017
 ms.author: carolz
 ---
 
-#Event Hubs Documentation
+# Event Hubs Documentation
 
 Learn how to use Event Hubs to collect and manage millions of events per second from connected IoT devices and applications. Tutorials, API references, and other documentation show you how set up scalable ingestion for events on a broad set of platforms.
 
@@ -26,7 +26,7 @@ Learn how to use Event Hubs to collect and manage millions of events per second 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/event-hubs.svg" alt="" />
+                            <img src="media/index/event-hubs.svg" alt="Learn about Azure Event Hubs" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -44,7 +44,7 @@ Learn how to use Event Hubs to collect and manage millions of events per second 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/video-library.svg" alt="" />
+                            <img src="media/index/video-library.svg" alt="Azure Event Hubs Video Library" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -62,7 +62,7 @@ Learn how to use Event Hubs to collect and manage millions of events per second 
                <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="Get started with Event Hubs programming guide" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -80,7 +80,7 @@ Learn how to use Event Hubs to collect and manage millions of events per second 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/tutorial.svg" alt="" />
+                            <img src="media/index/tutorial.svg" alt="Get started with Event Hubs using the Azure portal" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -101,11 +101,20 @@ Learn how to use Event Hubs to collect and manage millions of events per second 
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardText">
-                        <h3>.NET</h3>
-                        <p><a href="/dotnet/api/microsoft.azure.eventhubs">Microsoft.Azure.EventHubs</a></p>
-                        <p><a href="/dotnet/api/microsoft.azure.eventhubs.processor">Microsoft.Azure.EventHubs.Processor</a></p>
-                        <p><a href="/dotnet/api/microsoft.servicebus.messaging">Microsoft.ServiceBus.Messaging</a></p>
-                        <p><a href="/dotnet/api/microsoft.azure.servicebus.eventprocessorhost">Microsoft.Azure.ServiceBus.EventProcessorHost</a></p>
+                        <h3>Command-Line</h3>
+                        <p><a href="/powershell/module/azurerm.eventhub/">PowerShell</a></p>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardText">
+                        <h3>Languages</h3>
+                        <p><a href="/dotnet/api/overview/azure/event-hubs/">.NET</a></p>
                    </div>
                 </div>
             </div>
@@ -117,8 +126,7 @@ Learn how to use Event Hubs to collect and manage millions of events per second 
                 <div class="card">
                     <div class="cardText">
                         <h3>Java</h3>
-                        <p><a href="/java/api/com.microsoft.azure.eventhubs">com.microsoft.azure.eventhubs</a></p>
-                        <p><a href="/java/api/com.microsoft.azure.eventprocessorhost">com.microsoft.azure.eventprocessorhost</a></p>
+                        <p><a href="/java/api/overview/azure/eventhub/">Java</a></p>
                     </div>
                 </div>
             </div>
@@ -129,9 +137,8 @@ Learn how to use Event Hubs to collect and manage millions of events per second 
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardText">
-                        <h3><a href="/rest/api/eventhub">REST</a></h3>
-                        <p><a href="/azure/event-hubs/event-hubs-messaging-exceptions">Exceptions</a></p>
-                        <p><a href="/azure/event-hubs/event-hubs-quotas">Quotas</a></p>
+                        <h3>REST</h3>
+                        <p><a href="/rest/api/eventhub">REST API Reference</a></p>
                     </div>
                 </div>
             </div>

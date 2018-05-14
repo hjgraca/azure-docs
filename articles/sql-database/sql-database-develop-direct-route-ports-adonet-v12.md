@@ -1,25 +1,22 @@
 ---
 title: Ports beyond 1433 for SQL Database | Microsoft Docs
-description: Client connections from ADO.NET to Azure SQL Database sometimes bypass the proxy and interact directly with the database. Ports other than 1433 become important.
+description: Client connections from ADO.NET to Azure SQL Database can bypass the proxy and interact directly with the database using ports other than 1433.
 services: sql-database
-documentationcenter: ''
 author: MightyPen
 manager: jhubbard
-editor: ''
-
-ms.assetid: 3f17106a-92fd-4aa4-b6a9-1daa29421f64
 ms.service: sql-database
-ms.custom: development
-ms.workload: drivers
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.custom: develop apps
 ms.topic: article
-ms.date: 08/17/2016
+ms.date: 04/01/2018
 ms.author: sstein
 
 ---
 # Ports beyond 1433 for ADO.NET 4.5
-This topic describes the Azure SQL Database connection behavior for clients that use ADO.NET 4.5 or a later version.
+This topic describes the Azure SQL Database connection behavior for clients that use ADO.NET 4.5 or a later version. 
+
+> [!IMPORTANT]
+> For information about connectivity architecture, see [Azure SQL Database connectivity architecture](sql-database-connectivity-architecture.md).
+>
 
 ## Outside vs inside
 For connections to Azure SQL Database, we must first ask whether your client program runs *outside* or *inside* the Azure cloud boundary. The subsections discuss two common scenarios.
@@ -28,7 +25,7 @@ For connections to Azure SQL Database, we must first ask whether your client pro
 Port 1433 is the only port that must be open on your desktop computer that hosts your SQL Database client application.
 
 #### *Inside:* Client runs on Azure
-When your client runs inside the Azure cloud boundary, it uses what we can call a *direct route* to interact with the SQL Database server. After a connection is established, further interactions between the client and database involve no middleware proxy.
+When your client runs inside the Azure cloud boundary, it uses what we can call a *direct route* to interact with the SQL Database server. After a connection is established, further interactions between the client and database involve no Azure SQL Database Gateway.
 
 The sequence is as follows:
 

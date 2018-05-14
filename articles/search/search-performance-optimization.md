@@ -1,19 +1,13 @@
 ---
 title: Azure Search performance and optimization considerations | Microsoft Docs
 description: Tune Azure Search performance and configure optimum scale
-services: search
-documentationcenter: ''
 author: LiamCavanagh
-manager: pablocas
-editor: ''
-
-ms.assetid: 4d3cd864-29d2-4921-be0d-a3f1a819de46
+manager: jlembicz
+services: search
 ms.service: search
 ms.devlang: rest-api
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.date: 04/02/2017
+ms.topic: conceptual
+ms.date: 05/01/2017
 ms.author: liamca
 
 ---
@@ -76,7 +70,7 @@ The goal of a geo-distributed set of search services is to have two or more inde
 There are two options for keeping your distributed search services in sync which consist of either using the [Azure Search Indexer](search-indexer-overview.md) or the Push API (also referred to as the [Azure Search REST API](https://docs.microsoft.com/rest/api/searchservice/)).  
 
 ### Azure Search Indexers
-If you are using the Azure Search Indexer, you are already importing data changes from a central datastore such as Azure SQL DB or DocumentDB. When you create a new search Service, you simply also create a new Azure Search Indexer for that service that points to this same datastore. That way, whenever new changes come into the data store, they will then be indexed by the various Indexers.  
+If you are using the Azure Search Indexer, you are already importing data changes from a central datastore such as Azure SQL DB or Azure Cosmos DB. When you create a new search Service, you simply also create a new Azure Search Indexer for that service that points to this same datastore. That way, whenever new changes come into the data store, they will then be indexed by the various Indexers.  
 
 Here is an example of what that architecture would look like.
 

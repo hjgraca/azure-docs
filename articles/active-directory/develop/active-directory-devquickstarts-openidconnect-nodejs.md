@@ -1,23 +1,26 @@
 ---
-title: Getting started with Azure AD sign-in and sign-out using Node.js | Microsoft Docs
+title: Azure AD Node.js web app getting started | Microsoft Docs
 description: Learn how to build a Node.js Express MVC web app that integrates with Azure AD for sign-in.
 services: active-directory
 documentationcenter: nodejs
-author: xerners
-manager: mbaldwin
+author: CelesteDG
+manager: mtillman
 editor: ''
 
 ms.assetid: 81deecec-dbe2-4e75-8bc0-cf3788645f99
 ms.service: active-directory
+ms.component: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: javascript
 ms.topic: article
-ms.date: 01/07/2017
-ms.author: brandwe
-
+ms.date: 04/20/2018
+ms.author: celested
+ms.reviewer: nacanuma
+ms.custom: aaddev
 ---
-# Node.js web app sign-in and sign-out with Azure AD
+
+# Azure AD Node.js web app getting started
 Here we use Passport to:
 
 * Sign the user in to the app with Azure Active Directory (Azure AD).
@@ -33,7 +36,7 @@ To do this, take the following steps:
 3. Use Passport to issue sign-in and sign-out requests to Azure AD.
 4. Print data about the user.
 
-The code for this tutorial is maintained [on GitHub](https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS).  To follow along, you can [download the app's skeleton as a .zip file](https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS/archive/skeleton.zip) or clone the skeleton:
+The code for this tutorial is maintained [on GitHub](https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS). To follow along, you can [download the app's skeleton as a .zip file](https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS/archive/skeleton.zip) or clone the skeleton:
 
 ```git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS.git```
 
@@ -44,14 +47,14 @@ The completed application is provided at the end of this tutorial as well.
 
 2. In the menu at the top of the page, select your account. Under the **Directory** list, choose the Active Directory tenant where you want to register your application.
 
-3. Select **More Services** in the menu on the left side of the screen, and then select **Azure Active Directory**.
+3. Select **All services** in the menu on the left side of the screen, and then select **Azure Active Directory**.
 
 4. Select **App registrations**, and then select **Add**.
 
 5. Follow the prompts to create a **Web Application** and/or **WebAPI**.
   * The **name** of the application describes your application to users.
 
-  * The **Sign-On URL** is the base URL of your app.  The skeleton's default is `http://localhost:3000/auth/openid/return``.
+  * The **Sign-On URL** is the base URL of your app. The skeleton's default is `http://localhost:3000/auth/openid/return`.
 
 6. After you register, Azure AD assigns your app a unique application ID. You need this value in the following sections, so copy it from the application page.
 7. From the **Settings** -> **Properties** page for your application, update the App ID URI. The **App ID URI** is a unique identifier for your application. The convention is to use the format `https://<tenant-domain>/<app-name>`, for example: `https://contoso.onmicrosoft.com/my-first-aad-app`.
@@ -74,7 +77,7 @@ The completed application is provided at the end of this tutorial as well.
 This installs the libraries that `passport-azure-ad` depends on.
 
 ## Step 3: Set up your app to use the passport-node-js strategy
-Here, we configure Express to use the OpenID Connect authentication protocol.  Passport is used to do various things, including issue sign-in and sign-out requests, manage the user's session, and get information about the user.
+Here, we configure Express to use the OpenID Connect authentication protocol. Passport is used to do various things, including issue sign-in and sign-out requests, manage the user's session, and get information about the user.
 
 1. To begin, open the `config.js` file at the root of the project, and then enter your app's configuration values in the `exports.creds` section.
 
@@ -92,7 +95,7 @@ Here, we configure Express to use the OpenID Connect authentication protocol.  P
     // add a logger
 
     var log = bunyan.createLogger({
-    name: 'Microsoft OIDC Example Web Application'
+        name: 'Microsoft OIDC Example Web Application'
     });
     ```
 
@@ -138,10 +141,9 @@ Here, we configure Express to use the OpenID Connect authentication protocol.  P
     ```
 Passport uses a similar pattern for all its strategies (Twitter, Facebook, and so on) that all strategy writers adhere to. Looking at the strategy, you see that we pass it a function that has a token and a done as the parameters. The strategy comes back to us after it does its work. Then we want to store the user and stash the token so we don't need to ask for it again.
 
-    > [!IMPORTANT]
-    > The previous code takes any user that happens to authenticate to our server. This is known as auto-registration. We recommend that you don't let anyone authenticate to a production server without first having them register via a process that you decide on. This is usually the pattern you see in consumer apps, which allow you to register with Facebook but then ask you to provide additional information. If this weren't a sample application, we could have extracted the user's email address from the token object that is returned and then asked the user to fill out additional information. Because this is a test server, we add them to the in-memory database.
->
->
+> [!IMPORTANT]
+The previous code takes any user that happens to authenticate to our server. This is known as auto-registration. We    recommend that you don't let anyone authenticate to a production server without first having them register via a process that you decide on. This is usually the pattern you see in consumer apps, which allow you to register with Facebook but then ask you to provide additional information. If this weren't a sample application, we could have extracted the user's email address from the token object that is returned and then asked the user to fill out additional information. Because this is a test server, we add them to the in-memory database.
+
 
 4. Next, let's add the methods that enable us to track the signed-in users as required by Passport. These methods include serializing and deserializing the user's information.
 
@@ -154,31 +156,31 @@ Passport uses a similar pattern for all its strategies (Twitter, Facebook, and s
             //   this is done simply by storing the user ID when serializing and finding
             //   the user by ID when deserializing.
             passport.serializeUser(function(user, done) {
-            done(null, user.email);
+                done(null, user.email);
             });
 
             passport.deserializeUser(function(id, done) {
-            findByEmail(id, function (err, user) {
-                done(err, user);
-            });
+                findByEmail(id, function (err, user) {
+                    done(err, user);
+                });
             });
 
             // array to hold signed-in users
             var users = [];
 
             var findByEmail = function(email, fn) {
-            for (var i = 0, len = users.length; i < len; i++) {
-                var user = users[i];
-            log.info('we are using user: ', user);
-                if (user.email === email) {
-                return fn(null, user);
+                for (var i = 0, len = users.length; i < len; i++) {
+                    var user = users[i];
+                    log.info('we are using user: ', user);
+                    if (user.email === email) {
+                        return fn(null, user);
+                    }
                 }
-            }
-            return fn(null, null);
+                return fn(null, null);
             };
-            ```
+    ```
 
-5.  Next, let's add the code to load the Express engine. Here we use the default /views and /routes pattern that Express provides.
+5. Next, let's add the code to load the Express engine. Here we use the default /views and /routes pattern that Express provides.
 
     ```JavaScript
 
@@ -201,13 +203,12 @@ Passport uses a similar pattern for all its strategies (Twitter, Facebook, and s
           app.use(express.static(__dirname + '/../../public'));
         });
 
-        ```
+    ```
 
 6. Finally, let's add the routes that hand off the actual sign-in requests to the `passport-azure-ad` engine:
 
-       
-       ```JavaScript
- 
+    ```JavaScript
+
         // Our Auth routes (section 3)
 
         // GET /auth/openid
@@ -223,34 +224,34 @@ Passport uses a similar pattern for all its strategies (Twitter, Facebook, and s
             res.redirect('/');
         });
 
-            // GET /auth/openid/return
-            //   Use passport.authenticate() as route middleware to authenticate the
-            //   request. If authentication fails, the user is redirected back to the
-            //   sign-in page. Otherwise, the primary route function is called,
-            //   which, in this example, redirects the user to the home page.
-            app.get('/auth/openid/return',
-              passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
-              function(req, res) {
-                log.info('We received a return from AzureAD.');
-                res.redirect('/');
-              });
+        // GET /auth/openid/return
+        //   Use passport.authenticate() as route middleware to authenticate the
+        //   request. If authentication fails, the user is redirected back to the
+        //   sign-in page. Otherwise, the primary route function is called,
+        //   which, in this example, redirects the user to the home page.
+        app.get('/auth/openid/return',
+          passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
+          function(req, res) {
+            log.info('We received a return from AzureAD.');
+            res.redirect('/');
+          });
 
-            // POST /auth/openid/return
-            //   Use passport.authenticate() as route middleware to authenticate the
-            //   request. If authentication fails, the user is redirected back to the
-            //   sign-in page. Otherwise, the primary route function is called,
-            //   which, in this example, redirects the user to the home page.
-            app.post('/auth/openid/return',
-              passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
-              function(req, res) {
-                log.info('We received a return from AzureAD.');
-                res.redirect('/');
-              });
-          ```
+        // POST /auth/openid/return
+        //   Use passport.authenticate() as route middleware to authenticate the
+        //   request. If authentication fails, the user is redirected back to the
+        //   sign-in page. Otherwise, the primary route function is called,
+        //   which, in this example, redirects the user to the home page.
+        app.post('/auth/openid/return',
+          passport.authenticate('azuread-openidconnect', { failureRedirect: '/login' }),
+          function(req, res) {
+            log.info('We received a return from AzureAD.');
+            res.redirect('/');
+          });
+     ```
 
 
 ## Step 4: Use Passport to issue sign-in and sign-out requests to Azure AD
-Your app is now properly configured to communicate with the endpoint by using the OpenID Connect authentication protocol.  `passport-azure-ad` has taken care of all the details of crafting authentication messages, validating tokens from Azure AD, and maintaining user sessions. All that remains is giving your users a way to sign in and sign out, and gathering additional information about the signed-in users.
+Your app is now properly configured to communicate with the endpoint by using the OpenID Connect authentication protocol. `passport-azure-ad` has taken care of all the details of crafting authentication messages, validating tokens from Azure AD, and maintaining user sessions. All that remains is giving your users a way to sign in and sign out, and gathering additional information about the signed-in users.
 
 1. First, let's add the default, sign-in, account, and sign-out methods to our `app.js` file:
 
@@ -280,7 +281,7 @@ Your app is now properly configured to communicate with the endpoint by using th
 
     ```
 
-2.  Let's review these in detail:
+2. Let's review these in detail:
 
   * The `/`route redirects to the index.ejs view, passing the user in the request (if it exists).
   * The `/account` route first *ensures we are authenticated* (we implement that in the following example), and then passes the user in the request so that we can get additional information about the user.
@@ -325,11 +326,11 @@ Now `app.js` is complete. We simply need to add the routes and views that show t
                 exports.index = function(req, res){
                   res.render('index', { title: 'Express' });
                 };
-                ```
+    ```
 
 2. Create the `/routes/user.js` route under the root directory.
 
-                ```JavaScript
+    ```JavaScript
                 /*
                  * GET users listing.
                  */
@@ -337,7 +338,7 @@ Now `app.js` is complete. We simply need to add the routes and views that show t
                 exports.list = function(req, res){
                   res.send("respond with a resource");
                 };
-        ```
+    ```
 
  These pass along the request to our views, including the user if present.
 
@@ -354,7 +355,7 @@ Now `app.js` is complete. We simply need to add the routes and views that show t
     <% } %>
     ```
 
-4. Create the `/views/account.ejs` view under the root directory so that we can view additional information that `passport-azuread` has put in the user request.
+4. Create the `/views/account.ejs` view under the root directory so that we can view additional information that `passport-azure-ad` has put in the user request.
 
     ```Javascript
     <% if (!user) { %>
@@ -400,7 +401,7 @@ Now `app.js` is complete. We simply need to add the routes and views that show t
     </html>
     ```
 
-##Next steps
+## Next steps
 Finally, build and run your app. Run `node app.js`, and then go to `http://localhost:3000`.
 
 Sign in with either a personal Microsoft account or a work or school account, and notice how the user's identity is reflected in the /account list. You now have a web app that's secured with industry standard protocols that can authenticate users with both their personal and work/school accounts.

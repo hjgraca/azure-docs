@@ -4,7 +4,7 @@ description: Common rrors that could be causing you to not be able to sign into 
 services: active-directory
 documentationcenter: ''
 author: ajamess
-manager: femila
+manager: mtillman
 
 ms.assetid: 
 ms.service: active-directory
@@ -12,7 +12,7 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/04/2017
+ms.date: 07/11/2017
 ms.author: asteen
 
 ---
@@ -31,10 +31,10 @@ There are several errors that could be causing you to not be able to sign into a
 
 ## Next steps
 
-[Azure AD Developer Guide](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-developers-guide)<br>
+[Azure AD Developer Guide](https://docs.microsoft.com/azure/active-directory/develop/active-directory-developers-guide)<br>
 
-[Consent and Integrating Apps to Azure AD](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications>)<br>
+[Consent and Integrating Apps to Azure AD](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications>)<br>
 
-[Consent and Permissioning for Azure AD v2.0 converged Apps](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes)<br>
+[Consent and Permissioning for Azure AD v2.0 converged Apps](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)<br>
 
 [Azure AD StackOverflow](http://stackoverflow.com/questions/tagged/azure-active-directory>)

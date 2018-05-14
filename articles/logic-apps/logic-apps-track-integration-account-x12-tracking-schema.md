@@ -14,7 +14,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 01/27/2017
-ms.author: padmavc
+ms.author: LADocs; padmavc
 
 ms.custom: H1Hack27Feb2017 
 
@@ -352,5 +352,5 @@ You can use these X12 tracking schemas in your Azure integration account to help
 * Learn more about [monitoring B2B messages](logic-apps-monitor-b2b-message.md).
 * Learn more about [AS2 tracking schemas](../logic-apps/logic-apps-track-integration-account-as2-tracking-schemas.md).
 * Learn more about [B2B custom tracking schemas](../logic-apps/logic-apps-track-integration-account-custom-tracking-schema.md).
-* Learn about [tracking B2B messages in the Operations Management Suite portal](../logic-apps/logic-apps-track-b2b-messages-omsportal.md).
+* Learn about [tracking B2B messages in Log Analytics](../logic-apps/logic-apps-track-b2b-messages-omsportal.md).
 * Learn more about the [Enterprise Integration Pack](../logic-apps/logic-apps-enterprise-integration-overview.md).  

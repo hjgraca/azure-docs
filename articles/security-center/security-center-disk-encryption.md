@@ -1,10 +1,10 @@
----
+﻿---
 title: Encrypt an Azure Virtual Machine | Microsoft Docs
 description: This document helps you to encrypt an Azure Virtual Machine after receiving an alert from Azure Security Center.
 services: security, security-center
 documentationcenter: na
 author: TomShinder
-manager: swadhwa
+manager: mbaldwin
 editor: ''
 
 ms.assetid: f6c28bc4-1f79-4352-89d0-03659b2fa2f5
@@ -23,7 +23,7 @@ Azure Security Center will alert you if you have virtual machines that are not e
 ![Disk encryption recommendation](./media/security-center-disk-encryption/security-center-disk-encryption-fig1.png)
 
 > [!NOTE]
-> The information in this document applies to encrypting virtual machines without using a Key Encryption Key (which is required for backing up virtual machines using Azure Backup). Please see the article [Azure Disk Encryption for Windows and Linux Azure Virtual Machines](https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption) for information on how to use a Key Encryption Key to support Azure Backup for encrypted Azure Virtual Machines.
+> The information in this document applies to encrypting virtual machines without using a Key Encryption Key (which is required for backing up virtual machines using Azure Backup). Please see the article [Azure Disk Encryption for Windows and Linux Azure Virtual Machines](https://docs.microsoft.com/azure/security/azure-security-disk-encryption) for information on how to use a Key Encryption Key to support Azure Backup for encrypted Azure Virtual Machines.
 >
 >
 
@@ -44,12 +44,12 @@ There are many approaches that can be used to setup the prerequisites and to con
 >
 
 ## Install and configure Azure PowerShell
-You need Azure PowerShell version 1.2.1 or above installed on your computer. The article [How to install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs) contains all the steps you need to provision your computer to work with Azure PowerShell. The most straightforward approach is to use the Web PI installation approach mentioned in that article. Even if you already have Azure PowerShell installed, install again using the Web PI approach so that you have the latest version of Azure PowerShell.
+You need Azure PowerShell version 1.2.1 or above installed on your computer. The article [How to install and configure Azure PowerShell](/powershell/azure/overview) contains all the steps you need to provision your computer to work with Azure PowerShell. The most straightforward approach is to use the Web PI installation approach mentioned in that article. Even if you already have Azure PowerShell installed, install again using the Web PI approach so that you have the latest version of Azure PowerShell.
 
 ## Obtain and run the Azure disk encryption prerequisites configuration script
 The Azure Disk Encryption Prerequisites Configuration Script will set up all the prerequisites required for encrypting your Azure Virtual Machines.
 
-1. Go to the GitHub page that has the [Azure Disk Encryption Prerequisite Setup Script](https://github.com/Azure/azure-powershell/blob/dev/src/ResourceManager/Compute/Commands.Compute/Extension/AzureDiskEncryption/Scripts/AzureDiskEncryptionPreRequisiteSetup.ps1).
+1. Go to the GitHub page that has the [Azure Disk Encryption Prerequisite Setup Script](https://github.com/Azure/azure-powershell/blob/master/src/ResourceManager/Compute/Commands.Compute/Extension/AzureDiskEncryption/Scripts/AzureDiskEncryptionPreRequisiteSetup.ps1).
 2. On the GibHub page, click the **Raw** button.
 3. Use **CTRL-A** to select all the text on the page and then use **CTRL-C** to copy all the text on the page to the clipboard.
 4. Open **Notepad** and paste the copied text into Notepad.
@@ -89,7 +89,7 @@ Perform the following steps to encrypt an Azure Virtual Machine:
 1. If you closed the PowerShell ISE, open an elevated instance of the PowerShell ISE. Follow the instructions earlier in this article if the PowerShell ISE is not already open. If you closed the script, then open the **ADEPrereqScript.ps1** clicking **File**, then **Open** and selecting the script from the **c:\AzureADEScript** folder. If you have followed this article from the start, then just move on to the next step.
 2. In the console of the PowerShell ISE (the bottom pane of the PowerShell ISE), change the focus to the local of the script by typing **cd c:\AzureADEScript** and press **ENTER**.
 3. Set the execution policy on your machine so that you can run the script. Type **Set-ExecutionPolicy Unrestricted** in the console and then press ENTER. If you see a dialog box telling about the effects of the change to execution policy, click either **Yes to all** or **Yes** (if you see **Yes to all**, select that option – if you do not see **Yes to all**, then click **Yes**).
-4. Log into your Azure account. In the console, type **Login-AzureRmAccount** and press **ENTER**. A dialog box will appear in which you enter your credentials (make sure you have rights to change the virtual machines – if you do not have rights, you will not be able to encrypt them. If you are not sure, ask your subscription owner or administrator). You should see information about your **Environment**, **Account**, **TenantId**, **SubscriptionId** and **CurrentStorageAccount**. Copy the **SubscriptionId** to Notepad. You will need to use this in step #6.
+4. Log into your Azure account. In the console, type **Connect-AzureRmAccount** and press **ENTER**. A dialog box will appear in which you enter your credentials (make sure you have rights to change the virtual machines – if you do not have rights, you will not be able to encrypt them. If you are not sure, ask your subscription owner or administrator). You should see information about your **Environment**, **Account**, **TenantId**, **SubscriptionId** and **CurrentStorageAccount**. Copy the **SubscriptionId** to Notepad. You will need to use this in step #6.
 5. Find what subscription your virtual machine belongs to and its location. Go to [https://portal.azure.com](ttps://portal.azure.com) and log in.  On the left side of the page, click **Virtual Machines**. You will see a list of your virtual machines and the subscriptions they belong to.
 
    ![Virtual Machines](./media/security-center-disk-encryption/security-center-disk-encryption-fig3.png)

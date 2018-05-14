@@ -2,7 +2,7 @@
 title: Azure ExpressRoute Documentation - Tutorials, API Reference | Microsoft Docs
 description: Learn how to configure and manage a private ExpressRoute connection to Microsoft cloud services from your on-premises infrastructure or colocation facility.
 services: expressroute
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
 ms.assetid:	
@@ -14,7 +14,7 @@ ms.date: 01/23/2017
 ms.author: carolz
 ---
 
-#ExpressRoute Documentation
+# ExpressRoute Documentation
 
 Learn how to use ExpressRoute to set up a fast, private connection to Microsoft cloud services from your on-premises infrastructure or colocation facility. Tutorials, REST APIs, and other documentation help you configure and manage an ExpressRoute circuit.
 
@@ -85,10 +85,11 @@ Learn how to use ExpressRoute to set up a fast, private connection to Microsoft 
                 <div class="card">
                     <div class="cardText">
                         <h3>Command-Line</h3>
-                        <p><a href="/powershell/resourcemanager/azurerm.network/v3.4.0/azurerm.network">PowerShell</a></p>
+                        <p><a href="/powershell/module/azurerm.network/#expressroute">PowerShell</a></p>
+                        <p><a href="/cli/azure/network/express-route">Azure CLI</a></p>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </li>
     <li>
